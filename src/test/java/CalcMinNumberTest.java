@@ -9,18 +9,14 @@ import static org.junit.Assert.*;
 public class CalcMinNumberTest {
 
     @Test
-    public void minNumberNotResursive(){
-        try {
-            assertEquals("Минимальное число", 3, new CalcMinNumber(Arrays.asList(50, 19, 3, 4, 42))
-                    .minNumberNotResursive());
-        }catch (MyException e) {System.out.println("Error. Not found elem");}
+    public void minNumberNotResursive() throws MyException{
+        assertEquals("Минимальное число", 3, new CalcMinNumber(Arrays.asList(50, 19, 3, 4, 42))
+                .minNumberNotResursive());
     }
 
     @Test
-    public void minNumberResursive(){
-        try{
-            assertEquals("Минимальное число",3, new CalcMinNumber(Arrays.asList(50, 19, 3, 4, 42))
-                    .minNumberResursive());
-        }catch (MyException e) {System.out.println("Error. Not found elem");}
+    public void minNumberResursive() throws MyException{
+        assertEquals("Минимальное число",3, new CalcMinNumber(Arrays.asList(50, 19, 3, 4, 42))
+                .minNumberResursive());
     }
 }
