@@ -8,9 +8,15 @@ public class CalcMinNumber {
     private int result;
     private int index;
 
-    CalcMinNumber(List<Integer> list){
-        this.list = list;
-        this.index = 0;
+    CalcMinNumber(List<Integer> list) throws MyException{
+        try{
+            if(list.isEmpty()){
+                throw new NoSuchElementException();
+            }
+            this.list = list;
+            this.index = 0;
+        }catch (NoSuchElementException e) {throw new MyException(ErrorCode.NotFindElem);}
+
     }
 
     public int minNumberNotResursive() throws MyException{
