@@ -10,9 +10,15 @@ public class FindPrimeNumbers {
     private List<Integer> result = new ArrayList<Integer>();
     private int index;
 
-    FindPrimeNumbers(List<Integer> list){
-        this.list = list;
-        this.index = 0;
+    FindPrimeNumbers(List<Integer> list)throws MyException{
+        try {
+            if(list.isEmpty()){
+                throw new NoSuchElementException();
+            }
+            this.list = list;
+            this.index = 0;
+        }catch (NoSuchElementException e) {throw new MyException(ErrorCode.NotFindElem);}
+
     }
 
     public List<Integer> primeNumbersRecursive() throws MyException{
