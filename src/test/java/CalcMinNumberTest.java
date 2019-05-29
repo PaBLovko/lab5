@@ -9,17 +9,25 @@ import java.util.logging.Logger;
 import static org.junit.Assert.*;
 
 public class CalcMinNumberTest {
-    private static Logger log = Logger.getLogger(CalcMinNumberTest.class.getName());
 
     @Test
     public void minNumberNotResursive() throws MyException{
-        assertEquals("Минимальное число", 3, new CalcMinNumber(Arrays.asList(50, 19, 3, 4, 42))
-                .minNumberNotResursive());
+        assertEquals("Минимальное число", 3, CalcMinNumber.minNumberNotResursive(Arrays.asList(50, 19, 3, 4, 42)));
     }
+
+    @Test(expected = MyException.class)
+    public void minNumberNotResursive1() throws MyException{
+        CalcMinNumber.minNumberNotResursive(Arrays.asList());
+    }
+
 
     @Test
     public void minNumberResursive() throws MyException{
-        assertEquals("Минимальное число",3, new CalcMinNumber(Arrays.asList(50, 19, 3, 4, 42))
-                .minNumberResursive());
+        assertEquals("Минимальное число",3, CalcMinNumber.minNumberResursive(Arrays.asList(50, 19, 3, 4, 42), 0,0));
+    }
+
+    @Test(expected = MyException.class)
+    public void minNumberResursive1() throws MyException{
+        CalcMinNumber.minNumberResursive(Arrays.asList(), 0,0);
     }
 }

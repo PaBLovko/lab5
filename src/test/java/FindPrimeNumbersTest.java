@@ -10,12 +10,18 @@ import org.hamcrest.CoreMatchers;
         import static org.junit.Assert.*;
 
 public class FindPrimeNumbersTest {
-    private static Logger log = Logger.getLogger(FindPrimeNumbersTest.class.getName());
 
     @Test
     public void primeNumbersRecursive() throws MyException{
-        assertThat("Массив простых чисел",new FindPrimeNumbers(Arrays.asList(50, 11, 3, 4, 42))
-                .primeNumbersRecursive(),CoreMatchers.hasItems(3,11));
+        List<Integer> result = new ArrayList<>();
+        assertThat("Массив простых чисел", FindPrimeNumbers.primeNumbersRecursive(Arrays.asList(50, 11, 3, 4, 42), 0, result)
+                ,CoreMatchers.hasItems(3,11));
+    }
+
+    @Test(expected = MyException.class)
+    public void primeNumbersRecursive1() throws MyException{
+        List<Integer> result = new ArrayList<>();
+        FindPrimeNumbers.primeNumbersRecursive(Arrays.asList(), 0, result);
     }
 
     @Test
@@ -23,9 +29,14 @@ public class FindPrimeNumbersTest {
         assertTrue("Число простое", FindPrimeNumbers.isPrime(11));
     }
 
+    @Test(expected = MyException.class)
+    public void primeNumberNotRecursive1() throws MyException{
+        FindPrimeNumbers.primeNumberNotRecursive(Arrays.asList());
+    }
+
     @Test
     public void primeNumberNotRecursive() throws MyException{
-        assertThat("Массив простых чисел", new FindPrimeNumbers(Arrays.asList(50, 11, 3, 4, 42))
-                .primeNumberNotRecursive(),CoreMatchers.hasItems(3,11));
+        assertThat("Массив простых чисел", FindPrimeNumbers.primeNumberNotRecursive(Arrays.asList(50, 11, 3, 4, 42))
+                ,CoreMatchers.hasItems(3,11));
     }
 }

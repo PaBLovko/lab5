@@ -4,40 +4,27 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class CalcMinNumber {
-    private List<Integer> list;
-    private int result;
-    private int index;
 
-    CalcMinNumber(List<Integer> list) throws MyException{
-        try{
-            if(list.isEmpty()){
-                throw new NoSuchElementException();
-            }
-            this.list = list;
-            this.index = 0;
-        }catch (NoSuchElementException e) {throw new MyException(ErrorCode.NotFindElem);}
-
+    public static int minNumberNotResursive(List<Integer> list) throws MyException{
+        if(list.isEmpty()){
+            throw new MyException(ErrorCode.NotFindElem);
+        }
+        return list.stream().mapToInt(v->v).min().orElseThrow(NoSuchElementException::new);
     }
 
-    public int minNumberNotResursive() throws MyException{
-        try{
-            return this.result = list.stream().mapToInt(v->v).min().orElseThrow(NoSuchElementException::new);
-        }catch (NoSuchElementException e) {throw new MyException(ErrorCode.NotFindElem);}
-    }
-
-    public int minNumberResursive() throws MyException{
-        try{
-            if(this.index == 0){
-                this.result = list.get(this.index);
-            }
-            if(this.result > list.get(this.index)) {
-                this.result = list.get(this.index);
-            }
-            if (this.index < this.list.size() - 1){
-                this.index++;
-                return this.minNumberResursive();
-            }
-            return this.result;
-        }catch (NoSuchElementException e) {throw new MyException(ErrorCode.NotFindElem);}
+    public static int minNumberResursive(List<Integer> list, int index, int result) throws MyException{
+        if(list.isEmpty()){
+            throw new MyException(ErrorCode.NotFindElem);
+        }
+        if(index == 0){
+            result = list.get(index);
+        }
+        if(result > list.get(index)) {
+            result = list.get(index);
+        }
+        if (index < list.size() - 1){
+            return minNumberResursive(list, ++index, result);
+        }
+        return result;
     }
 }
